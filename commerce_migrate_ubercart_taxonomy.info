@@ -1,0 +1,17 @@
+name = Commerce Migrate Ubercart Taxonomy
+description = Provides an upgrade path from Ubercart (D6 or D7) to Commerce Taxonomy.
+core = 7.x
+package = Commerce (contrib)
+dependencies[] = migrate
+dependencies[] = commerce_migrate_ubercart
+
+; Migrations
+files[] = vocabularies.inc
+
+; Information added by drupal.org packaging script on 2012-09-15
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "commerce_migrate_ubercart"
+datestamp = "1347668084"
+
+;http://drupal.org/node/1212172
