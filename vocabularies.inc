@@ -82,6 +82,7 @@ class MigrateTermMigration extends DynamicMigration {
     }
     
     // Get meta description and keyword values
+    $connection = commerce_migrate_ubercart_get_source_connection();
     $query = $connection->select('nodewords', 'ndw');
     $query->addField('ndw', 'name', 'name');
     $query->addField('ndw', 'content', 'content');
@@ -99,15 +100,15 @@ class MigrateTermMigration extends DynamicMigration {
     }
 
     // Get the meta title
-    $query_string = "SELECT page_title FROM {page_title} WHERE id = :id AND type = :type";
-    $page_title = $connection->query($query_string, array(':id' => $row->tid, ':type' => 'term'))->fetchObject();
+//     $query_string = "SELECT page_title FROM {page_title} WHERE id = :id AND type = :type";
+//     $page_title = $connection->query($query_string, array(':id' => $row->tid, ':type' => 'term'))->fetchObject();
     
-    if (!empty($page_title->page_title)) {
-      $row->metatag_title = $page_title->page_title;
-    }
+//     if (!empty($page_title->page_title)) {
+//       $row->metatag_title = $page_title->page_title;
+//     }
     
-    dpm(__METHOD__);
-    dpm($row);
+//     dpm(__METHOD__);
+//     dpm($row);
     // We could also have used this function to decide to skip a row, in cases
     // where that couldn't easily be done through the original query. Simply
     // return FALSE in such cases.
@@ -131,5 +132,17 @@ class MigrateTermMigration extends DynamicMigration {
     }
     return $migrations;
   }
+}
+
+function table_exists($tableName)
+{
+	$dbName = 'NAME_OF_DATABASE';
+
+	$sql ='SHOW TABLES WHERE Tables_in_' . dbName . ' = \'' . $tableName . '\'';
+	$rs = mysql_query($sql);
+	if(!mysql_fetch_array($rs))
+		return FALSE;
+	else
+		return TRUE;
 }
 ?>
